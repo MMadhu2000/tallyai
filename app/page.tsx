@@ -3,8 +3,15 @@
 import { useState, useEffect } from 'react';
 import supabase from '../supabaseClient';
 
+interface Ledger {
+  id: string;
+  name: string;
+  type: string;
+  group_name: string | null;
+}
+
 export default function LedgerManagement() {
-  const [ledgers, setLedgers] = useState([]);
+  const [ledgers, setLedgers] = useState<Ledger[]>([]);
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [group_name, setGroupName] = useState('');
@@ -23,7 +30,7 @@ export default function LedgerManagement() {
     }
 
     if (data) {
-      setLedgers(data);
+      setLedgers(data as Ledger[]);
     }
   }
 
